@@ -1,0 +1,38 @@
+{
+	"name": "lomkit-rest-client",
+	"version": "1.0.1",
+	"description": "TypeScript SDK for easily consuming lomkit/laravel-rest-api endpoints in Vue.js applications. Provides a typed, intuitive interface for handling resources.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/edepauw/lomkit-rest-client.git"
+	},
+	"keywords": [
+		"sdk",
+		"laravel-rest-api",
+		"laravel-client",
+		"rest",
+		"api",
+		"nuxt"
+	],
+	"author": "Eliott Depauw",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/edepauw/lomkit-rest-client/issues"
+	},
+	"homepage": "https://github.com/edepauw/lomkit-rest-client#readme",
+	"dependencies": {
+		"@nuxt/kit": "^3.9.0"
+	},
+	"peerDependencies": {
+		"nuxt": "^3.0.0"
+	},
+	"devDependencies": {
+		"@nuxt/module-builder": "^0.3.0",
+		"nuxt": "^3.0.0",
+		"typescript": "^5.0.0"
+	}
+}
