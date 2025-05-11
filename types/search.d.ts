@@ -97,6 +97,10 @@ interface ISearchResponse<T> {
   to: number;
   total: number;
   meta: any;
+  total_pages: number;
+  nextPage: () => Promise<ISearchResponse<T>>;
+  previousPage: () => Promise<ISearchResponse<T>>;
+  goToPage: (page: number) => Promise<ISearchResponse<T>>;
 }
 
 export type {
