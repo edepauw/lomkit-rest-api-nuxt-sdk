@@ -1,21 +1,18 @@
-import { CookieRef } from "nuxt/app";
-import type { IMutateRequest, IMutateResponse } from "../types/mutate";
+import type { IMutateRequest, IMutateResponse } from "../../types/mutate";
 
 const mutate = async <T>(
-	url: string,
-	token: CookieRef<string | null | undefined>,
-	mutations: IMutateRequest<T>[]
+	mutations: IMutateRequest<T>[],
+	resourceUrl: string,
+	{ headers, ...restRequestInit }: RequestInit,
 ): Promise<IMutateResponse> => {
 
-	if (!token.value)
-		throw new Error("Bearer token is not defined.");
-
-	const response = await fetch(`${url}/mutate`, {
+	const response = await fetch(`${resourceUrl}/mutate`, {
+		...restRequestInit,
 		method: "POST",
 		headers: {
+			...headers,
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			Authorization: `Bearer ${token.value}`,
 		},
 		body: JSON.stringify({ mutate: mutations }),
 	});

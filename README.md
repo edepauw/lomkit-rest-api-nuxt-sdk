@@ -24,14 +24,22 @@ npm install lomkit-rest-client
 ## ⚙️ Configuration
 
 ```typescript
-export default defineNuxtConfig({
-	//...
-	modules: ["lomkit-rest-client"],
-	lomkitRestClient: {
-		tokenName: "access_token", // default: "auth_token"
-		apiUrl: "http://localhost:4242", // default: "http://localhost"
-	},
-	//...
+// plugins/restClient.ts
+export default defineNuxtPlugin(() => {
+	const lomkitRestClient = useNuxtApp().$lomkitRestClient;
+	lomkitRestClient.addApiClient({
+		slug: "default",
+		url: "https://jsonplaceholder.typicode.com",
+		requestInit: () => {
+			const access_token = useCookie("cookie");
+			return {
+				headers: {
+					Authorization: `Bearer ${access_token.value}`,
+				},
+				credentials: "include",
+			};
+		},
+	});
 });
 ```
 
@@ -39,7 +47,7 @@ export default defineNuxtConfig({
 
 The `useResource` composable is the main entry point for interacting with the Lomkit REST API. It allows you to create a resource client that can perform various operations on a specific resource.
 
-The `useResource<T>(resourceName, defaults?)` composable returns an object with methods to interact with a specific resource via the Lomkit REST API. See the [methods](#methods) section for more details.
+The `useResource<T>(resourceName, resourceConfig?)` composable returns an object with methods to interact with a specific resource via the Lomkit REST API. See the [methods](#methods) section for more details.
 
 ```ts
 const productsResource = useResource<IProduct>("products", {

@@ -1,23 +1,19 @@
-import { CookieRef } from "nuxt/app";
-
-import type { IActionRequest, IActionResponse } from "../types/actions";
+import type { IActionRequest, IActionResponse } from "../../types/actions";
 
 const actions = async <T>(
-	url: string,
-	token: CookieRef<string | null | undefined>,
 	actionName: string,
-	params: IActionRequest<T>
+	params: IActionRequest<T>,
+	resourceUrl: string,
+	{ headers, ...restRequestInit }: RequestInit,
 ): Promise<IActionResponse> => {
 
-	if (!token.value)
-		throw new Error("Bearer token is not defined.");
-
-	const response = await fetch(`${url}/actions/${actionName}`, {
+	const response = await fetch(`${resourceUrl}/actions/${actionName}`, {
+		...restRequestInit,
 		method: "POST",
 		headers: {
+			...headers,
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify(params),
 	})

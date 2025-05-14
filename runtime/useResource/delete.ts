@@ -1,20 +1,16 @@
-import { CookieRef } from "nuxt/app";
-
 const remove = async (
-	url: string,
-	token: CookieRef<string | null | undefined>,
-	resourceIds: number[]
+	resourceIds: number[],
+	resourceUrl: string,
+	{ headers, ...restRequestInit }: RequestInit,
 ) => {
 
-	if (!token.value)
-		throw new Error("Bearer token is not defined.");
-
-	const response = await fetch(`${url}`, {
+	const response = await fetch(resourceUrl, {
+		...restRequestInit,
 		method: "DELETE",
 		headers: {
+			...headers,
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify({ resources: resourceIds }),
 	});
