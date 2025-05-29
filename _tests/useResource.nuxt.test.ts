@@ -1,11 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import useResource from '../runtime/useResource/index'
-import * as detailsModule from '../runtime/useResource/details'
-import * as findOneModule from '../runtime/useResource/findOne'
-import * as searchModule from '../runtime/useResource/search'
-import * as mutateModule from '../runtime/useResource/mutate'
-import * as actionsModule from '../runtime/useResource/actions'
-import * as removeModule from '../runtime/useResource/delete'
+import * as detailsModule from '../runtime/methods/details'
+import * as findOneModule from '../runtime/methods/findOne'
+import * as searchModule from '../runtime/methods/search'
+import * as mutateModule from '../runtime/methods/mutate'
+import * as actionsModule from '../runtime/methods/actions'
+import * as removeModule from '../runtime/methods/delete'
 
 const mockGetApiClient: any = vi.fn(() => ({
 	url: 'http://localhost:3000',
@@ -23,22 +23,22 @@ vi.mock('nuxt/app', () => ({
 	}),
 }))
 
-vi.mock('../runtime/useResource/details', () => ({
+vi.mock('../runtime/methods/details', () => ({
 	default: vi.fn(() => ({ data: {} })),
 }))
-vi.mock('../runtime/useResource/findOne', () => ({
+vi.mock('../runtime/methods/findOne', () => ({
 	default: vi.fn(() => ({})),
 }))
-vi.mock('../runtime/useResource/search', () => ({
+vi.mock('../runtime/methods/search', () => ({
 	default: vi.fn(() => ({ data: [], total: 0 })),
 }))
-vi.mock('../runtime/useResource/mutate', () => ({
+vi.mock('../runtime/methods/mutate', () => ({
 	default: vi.fn(() => ({ success: true })),
 }))
-vi.mock('../runtime/useResource/actions', () => ({
+vi.mock('../runtime/methods/actions', () => ({
 	default: vi.fn(() => ({ result: 'ok' })),
 }))
-vi.mock('../runtime/useResource/delete', () => ({
+vi.mock('../runtime/methods/delete', () => ({
 	default: vi.fn(() => ({ deleted: true })),
 }))
 

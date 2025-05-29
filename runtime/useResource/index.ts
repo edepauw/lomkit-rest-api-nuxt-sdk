@@ -1,11 +1,11 @@
 import { useNuxtApp } from "nuxt/app";
 
-import search from "./search";
-import mutate from "./mutate";
-import details from "./details";
-import actions from "./actions";
-import remove from "./delete";
-import findOne from "./findOne";
+import search from "../methods/search";
+import mutate from "../methods/mutate";
+import details from "../methods/details";
+import actions from "../methods/actions";
+import remove from "../methods/delete";
+import findOne from "../methods/findOne";
 
 import type { IMutateRequest, IMutateResponse } from "../../types/mutate";
 import type { IFindOneByIdRequest, ISearchQuery, ISearchResponse } from "../../types/search";
@@ -27,6 +27,9 @@ import type { IResourcePreset } from "../../types/resourceConfig";
 const useResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}) => {
 	// @ts-ignore
 	const apiClient = useNuxtApp().$lomkitRestClient.getApiClient(preset.apiClientSlug);
+
+	if (!resourceName)
+		throw new Error("Resource name is required");
 
 	const resourceUrl = apiClient.url + "/api/" + resourceName;
 

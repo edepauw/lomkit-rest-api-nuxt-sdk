@@ -28,12 +28,10 @@
 	"dependencies": {
 		"@mdi/font": "^7.4.47",
 		"@nuxt/kit": "^3.9.0",
-		"vite-plugin-vuetify": "^2.1.1",
 		"vitest": "^3.1.4"
 	},
 	"peerDependencies": {
-		"nuxt": "^3.0.0",
-		"vuetify": "^3.8.6"
+		"nuxt": "^3.0.0"
 	},
 	"devDependencies": {
 		"@nuxt/module-builder": "^0.3.0",
