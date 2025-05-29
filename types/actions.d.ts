@@ -1,4 +1,4 @@
-import { ISearchRequest } from "./search";
+import { ISearchQuery } from "./search";
 
 interface IActionField {
 	name: string;
@@ -7,7 +7,7 @@ interface IActionField {
 
 interface IActionRequest<T> {
 	fields?: IActionField[];
-	search?: ISearchRequest<T>;
+	search?: ISearchQuery<T>;
 }
 
 interface IActionResponse {

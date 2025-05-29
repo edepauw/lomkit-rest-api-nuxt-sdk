@@ -10,7 +10,7 @@ interface IMutateRelationRequest {
 }
 
 interface IMutateRequest<T> {
-  operation: "create" | "update" | "attach" | "detach" | "sync" | "toggle";
+  operation: "create" | "update";
   attributes?: T;
   key?: number | string;
   without_detaching?: boolean;

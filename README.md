@@ -1,6 +1,6 @@
 # 🔗 lomkit-rest-client
 
-> A Nuxt 3 SDK to easily interact with [lomkit/laravel-rest-api](https://github.com/lomkit/laravel-rest-api) endpoints — powered by TypeScript, designed for Vue/Nuxt ⚡️
+> A Nuxt 3 SDK to easily interact with [lomkit/laravel-rest-api](https://github.com/lomkit/laravel-rest-api) endpoints — powered by TypeScript, designed for Nuxt ⚡️
 
 **Note:** This package is community-built and not officially affiliated with Lomkit. It’s fully open-source and contributions are welcome!
 
@@ -23,28 +23,62 @@ npm install lomkit-rest-client
 
 ## ⚙️ Configuration
 
+to use the Lomkit REST client, you need to configure it in your Nuxt 3 application. You can do this by creating a plugin file in your `plugins` directory.
+
 ```typescript
-export default defineNuxtConfig({
-	//...
-	modules: ["lomkit-rest-client"],
-	lomkitRestClient: {
-		tokenName: "access_token", // default: "auth_token"
-		apiUrl: "http://localhost:4242", // default: "http://localhost"
-	},
-	//...
+// plugins/restClient.ts
+export default defineNuxtPlugin(() => {
+	const lomkitRestClient = useNuxtApp().$lomkitRestClient;
+	lomkitRestClient.addApiClient({
+		slug: "default",
+		url: "https://localhost",
+		requestInit: () => {
+			const access_token = useCookie("cookie");
+			return {
+				headers: {
+					Authorization: `Bearer ${access_token.value}`,
+				},
+				credentials: "include",
+			};
+		},
+	});
 });
 ```
+
+explanation:
+
+-   `slug`: A unique identifier for the API client.
+-   `url`: The base URL of your Lomkit REST API.
+-   `requestInit`: A function that returns an object containing the request headers and credentials. In this case, it retrieves the access token from a cookie named `cookie` and includes it in the `Authorization` header.
+-   `credentials`: Set to `include` to include cookies in cross-origin requests.
+
+you can add multiple API clients with different configurations by calling `addApiClient` multiple times with different `slug` values.
 
 # 📚 useResource
 
 The `useResource` composable is the main entry point for interacting with the Lomkit REST API. It allows you to create a resource client that can perform various operations on a specific resource.
 
-The `useResource<T>(resourceName, defaults?)` composable returns an object with methods to interact with a specific resource via the Lomkit REST API. See the [methods](#methods) section for more details.
+The `useResource<T>(resourceName, resourceConfig?)` composable returns an object with methods to interact with a specific resource via the Lomkit REST API. See the [methods](#methods) section for more details.
 
 ```ts
-const productsResource = useResource<IProduct>("products", {
-	search: { limit: 10 },
-});
+const preset = {
+	search: {
+		includes: [
+			{
+				relation: "category",
+			},
+			{
+				relation: "stars",
+			},
+		],
+		limit: 12,
+	},
+};
+
+const productsResource = useResource<IProducts>("products", preset);
+
+//you can also destructure the result to get the methods directly
+const { mutate, findOne, search } = useResource<IProducts>("products", preset);
 ```
 
 ## <a id="methods"></a> 🧩 Methods
@@ -52,9 +86,10 @@ const productsResource = useResource<IProduct>("products", {
 ### 🔎 `search(request?)`
 
 Search for resources based on the request parameters. (See [Search](https://laravel-rest-api.lomkit.com/endpoints/search) for more details.)
+search also add to the response methods for pagination, `nextPage()`, `previousPage()`, `goToPage()`
 
 ```TypeScript
-const products = await productsResource.search({
+const res = await productsResource.search({
     filters: [{
         field: "name",
         name: "Product Name",
@@ -65,6 +100,13 @@ const products = await productsResource.search({
         }
     ]
 }).catch((err) => console.error("Error during search: " ,err));
+
+//pagination methods
+const products = ref(res);
+const handleNextPage = () => {
+    products.value = await products.nextPage();
+};
+
 ```
 
 ### 🔎 `findOne(request?)`
@@ -134,6 +176,16 @@ Delete resources by their IDs. (See [Delete](https://laravel-rest-api.lomkit.com
 ```TypeScript
 const response = await productsResource.remove([1, 2]);
 ```
+
+## Roadmap
+
+-   [x] Add support for multiple API clients
+-   [x] Implement token handling via cookies
+-   [ ] Add tests for the SDK with Vitest
+-   [ ] Add components for input fields and forms for easier resource management
+-   [ ] Add components for displaying resources in lists and tables
+-   [ ] Read details from the API to use validation rules in components
+-   [ ] Improve error handling and logging
 
 ## Contributions
 

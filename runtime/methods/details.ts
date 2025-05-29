@@ -1,18 +1,15 @@
-import { CookieRef } from "nuxt/app";
-
 const details = async (
-	url: string,
-	token: CookieRef<string | null | undefined>
+	resourceUrl: string,
+	{ headers, ...restRequestInit }: RequestInit,
 ) => {
 
-	if (!token.value)
-		throw new Error("Bearer token is not defined.");
-
-	const response = await fetch(url, {
+	const response = await fetch(resourceUrl, {
+		...restRequestInit,
+		method: "GET",
 		headers: {
+			...headers,
 			"Content-Type": "application/json",
 			Accept: "application/json",
-			Authorization: `Bearer ${token.value}`,
 		},
 	})
 

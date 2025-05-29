@@ -1,4 +1,4 @@
-interface ISearchRequest<T> {
+interface ISearchQuery<T> {
   text?: IText;
   scopes?: IScopes[];
   filters?: IFilter<T>[];
@@ -12,6 +12,21 @@ interface ISearchRequest<T> {
   page?: number;
   limit?: number;
 }
+
+interface IFindOneByIdRequest<T> {
+  text?: IText;
+  scopes?: IScopes[];
+  sorts?: ISort[];
+  selects?: ISelect[];
+  includes?: IInclude<T>[];
+  aggregates?: IAggregate<T>[];
+  instructions?: IInstruction[];
+  pagination?: IPagination;
+  gates?: IGate[];
+  page?: number;
+  limit?: number;
+}
+
 
 interface IText {
   value: string;
@@ -87,7 +102,6 @@ interface IGate {
   gates: any[];
 }
 
-//response
 interface ISearchResponse<T> {
   current_page: number;
   data: T[];
@@ -97,10 +111,15 @@ interface ISearchResponse<T> {
   to: number;
   total: number;
   meta: any;
+  total_pages: number;
+  nextPage: () => Promise<ISearchResponse<T>>;
+  previousPage: () => Promise<ISearchResponse<T>>;
+  goToPage: (page: number) => Promise<ISearchResponse<T>>;
 }
 
 export type {
-  ISearchRequest,
+  ISearchQuery,
+  IFindOneByIdRequest,
   ISearchResponse,
   IText,
   IScopes,
