@@ -8,14 +8,14 @@ import remove from "./delete";
 import findOne from "./findOne";
 
 import type { IMutateRequest, IMutateResponse } from "../../types/mutate";
-import type { IFindOneByIdRequest, ISearchRequest, ISearchResponse } from "../../types/search";
+import type { IFindOneByIdRequest, ISearchQuery, ISearchResponse } from "../../types/search";
 import type { IActionRequest, IActionResponse } from "../../types/actions";
-import type { IResourceConfig } from "../../types/resourceConfig";
+import type { IResourcePreset } from "../../types/resourceConfig";
 
 /**
  * @author Eliott Depauw
  * @description A composable function to interact with a REST API.
- * @param {string} ressourceName The name of the resource to interact with.
+ * @param {string} resourceName The name of the resource to interact with.
  * @example
  *   const productsResource = useResource<IProduct>("products", {
  *     search: {
@@ -24,15 +24,15 @@ import type { IResourceConfig } from "../../types/resourceConfig";
  *     }
  *   });
  */
-const useResource = <T>(ressourceName: string, { apiClientSlug, searchConfig = {} }: IResourceConfig<T>) => {
-	// @ts-ignore $lomkitRestClient will be defined at runTime
-	const apiClient = useNuxtApp().$lomkitRestClient.getApiClient(apiClientSlug);
+const useResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}) => {
+	// @ts-ignore
+	const apiClient = useNuxtApp().$lomkitRestClient.getApiClient(preset.apiClientSlug);
 
-	const resourceUrl = apiClient.url + "/api/" + ressourceName;
+	const resourceUrl = apiClient.url + "/api/" + resourceName;
 
 	let requestInit =
 		typeof apiClient.requestInit === "function" ?
-			apiClient.requestInit() : (apiClient.requestInit ?? {});
+			apiClient.requestInit() : (apiClient?.requestInit ?? {});
 
 	return {
 		/**
@@ -43,12 +43,12 @@ const useResource = <T>(ressourceName: string, { apiClientSlug, searchConfig = {
 
 		/**
 		 * @description Fetches a single resource.
-		 * @param {ISearchRequest<T>} [request={}] The search request parameters.
+		 * @param {ISearchQuery<T>} [request={}] The search request parameters.
 		 * @returns {Promise<T | null>} The resource object or null if not found.
 		 * @example
 		 *   const product = await productsResource.findOne({ filters: [{ field: "id", operator: "=", value: 1 }] });
 		 */
-		findOne: async (request: ISearchRequest<T> = {}): Promise<T | null> => await findOne<T>({ ...searchConfig, ...request }, resourceUrl, requestInit),
+		findOne: async (request: ISearchQuery<T> = {}): Promise<T | null> => await findOne<T>({ ...preset.search, ...request }, resourceUrl, requestInit),
 
 		/**
 		 * @description Fetches a single resource by its ID.
@@ -58,18 +58,18 @@ const useResource = <T>(ressourceName: string, { apiClientSlug, searchConfig = {
 		 * @example
 		 *  const product = await productsResource.findOneById(1, { includes: [{ relation: "category" }]}
 		 */
-		findOneById: async (id: number, request: IFindOneByIdRequest<T> = {}): Promise<T | null> => await findOne<T>({ filters: [{ field: 'id', value: id }], ...searchConfig, ...request }, resourceUrl, requestInit),
+		findOneById: async (id: number | string, request: IFindOneByIdRequest<T> = {}): Promise<T | null> => await findOne<T>({ filters: [{ field: 'id', value: id }], ...preset.search, ...request }, resourceUrl, requestInit),
 
 		/**
 		 * @description Searches for resources.
-		 * @param {ISearchRequest<T>} [request={}] The search request parameters.
+		 * @param {ISearchQuery<T>} [request={}] The search request parameters.
 		 * @returns {Promise<ISearchResponse<T>>} An array of resources matching the search criteria.
 		 * @example
 		 *   const { data, total } = await productsResource.search({
 		 *     filters: [{ field: "category.name", value: "electronics" }]
 		 *   });
 		 */
-		search: async (request: ISearchRequest<T> = {}): Promise<ISearchResponse<T>> => await search<T>({ ...searchConfig, ...request }, resourceUrl, requestInit),
+		search: async (request: ISearchQuery<T> = {}): Promise<ISearchResponse<T>> => await search<T>({ ...preset.search, ...request }, resourceUrl, requestInit),
 
 		/**
 		 * @description Mutates resources.

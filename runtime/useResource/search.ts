@@ -1,11 +1,10 @@
-import type { ISearchRequest, ISearchResponse } from "../../types/search";
+import type { ISearchQuery, ISearchResponse } from "../../types/search";
 
 const search = async <T>(
-	searchConfig: ISearchRequest<T> = {},
+	searchQuery: ISearchQuery<T> = {},
 	resourceUrl: string,
 	{ headers, ...restRequestInit }: RequestInit,
 ): Promise<ISearchResponse<T>> => {
-
 	const response = await fetch(`${resourceUrl}/search`, {
 		...restRequestInit,
 		method: "POST",
@@ -14,7 +13,7 @@ const search = async <T>(
 			"Content-Type": "application/json",
 			Accept: "application/json",
 		},
-		body: JSON.stringify({ search }),
+		body: JSON.stringify({ search: searchQuery }),
 	});
 
 	if (!response.ok) {
@@ -31,7 +30,7 @@ const search = async <T>(
 		 * @returns {Promise<ISearchResponse<T>>} The next page of the search results.
 		 */
 		nextPage: async (): Promise<ISearchResponse<T>> => await search<T>(
-			{ ...searchConfig, page: ret.current_page + 1, limit: ret.per_page },
+			{ ...searchQuery, page: ret.current_page + 1, limit: ret.per_page },
 			resourceUrl,
 			{ headers, ...restRequestInit }
 		),

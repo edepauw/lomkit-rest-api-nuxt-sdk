@@ -1,8 +1,8 @@
-import type { ISearchRequest } from "./search";
+import type { ISearchQuery } from "./search";
 
-interface IResourceConfig<T> {
+interface IResourcePreset<T> {
 	apiClientSlug?: string;
-	searchConfig?: ISearchRequest<T>;
+	search?: ISearchQuery<T>;
 }
 
-export type { IResourceConfig };
+export type { IResourcePreset };

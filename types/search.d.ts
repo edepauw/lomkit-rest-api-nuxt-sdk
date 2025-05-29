@@ -1,4 +1,4 @@
-interface ISearchRequest<T> {
+interface ISearchQuery<T> {
   text?: IText;
   scopes?: IScopes[];
   filters?: IFilter<T>[];
@@ -102,7 +102,6 @@ interface IGate {
   gates: any[];
 }
 
-//response
 interface ISearchResponse<T> {
   current_page: number;
   data: T[];
@@ -119,7 +118,7 @@ interface ISearchResponse<T> {
 }
 
 export type {
-  ISearchRequest,
+  ISearchQuery,
   IFindOneByIdRequest,
   ISearchResponse,
   IText,

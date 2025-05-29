@@ -1,13 +1,16 @@
 import { defineNuxtPlugin } from "nuxt/app"
 import { reactive } from "vue"
 import type { IApiClient } from "../types/apiClient"
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
 export interface IlomkitRestClient {
 	addApiClient: (apiClient: IApiClient) => void
 	getApiClient: (slug?: string) => IApiClient | undefined
 }
 
-export default defineNuxtPlugin(() => {
+export default defineNuxtPlugin((nuxtApp) => {
 	const state = reactive({
 		apiClient: [] as IApiClient[]
 	})
@@ -36,6 +39,14 @@ export default defineNuxtPlugin(() => {
 		if (!slug) return state.apiClient.find((client) => client.isDefault)
 		return state.apiClient.find((client) => client.slug === slug)
 	}
+
+
+	const vuetify = createVuetify({
+		components,
+		directives,
+	})
+
+	nuxtApp.vueApp.use(vuetify)
 
 	return {
 		provide: {
