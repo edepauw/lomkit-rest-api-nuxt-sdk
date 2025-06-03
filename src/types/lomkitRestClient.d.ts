@@ -1,4 +1,4 @@
-import type { IlomkitRestClient } from '../runtime/plugin'
+import type { IlomkitRestClient } from '../src/runtime/plugin'
 
 declare module '#app' {
 	interface NuxtApp {
