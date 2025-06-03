@@ -23,7 +23,7 @@
 	],
 	"scripts": {
 		"prepack": "nuxt-module-build build",
-		"test": "vitest",
+		"test": "vitest run",
 		"test:ui": "vitest --ui --coverage.enabled=true",
 		"release": "npm run test && npm run prepack && npm publish"
 	},
