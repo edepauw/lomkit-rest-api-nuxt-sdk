@@ -7,10 +7,10 @@ import actions from "../methods/actions";
 import remove from "../methods/delete";
 import findOne from "../methods/findOne";
 
-import type { IMutateRequest, IMutateResponse } from "../../types/mutate";
-import type { IFindOneByIdRequest, ISearchQuery, ISearchResponse } from "../../types/search";
-import type { IActionRequest, IActionResponse } from "../../types/actions";
-import type { IResourcePreset } from "../../types/resourceConfig";
+import type { IMutateRequest, IMutateResponse } from "../types/mutate";
+import type { IFindOneByIdRequest, ISearchQuery, ISearchResponse } from "../types/search";
+import type { IActionRequest, IActionResponse } from "../types/actions";
+import type { IResourcePreset } from "../types/resourceConfig";
 
 /**
  * @author Eliott Depauw

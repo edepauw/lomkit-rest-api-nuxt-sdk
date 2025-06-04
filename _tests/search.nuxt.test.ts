@@ -87,7 +87,6 @@ describe('search method', () => {
 			total: 1,
 		}))
 		const result = await search({ page: 2 }, resourceUrl, requestInit)
-		console.log(result)
 		await result.previousPage()
 		expect(mockFetch).toHaveBeenLastCalledWith(
 			`${resourceUrl}/search`, {

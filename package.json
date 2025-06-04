@@ -1,7 +1,7 @@
 {
 	"name": "lomkit-rest-client",
-	"version": "1.0.5",
-	"description": "TypeScript SDK for easily consuming lomkit/laravel-rest-api endpoints in Vue.js applications. Provides a typed, intuitive interface for handling resources.",
+	"version": "1.0.6",
+	"description": "SDK for easily consuming lomkit/laravel-rest-api endpoints in Nuxt.js applications. Provides a typed, intuitive interface for handling resources.",
 	"license": "MIT",
 	"type": "module",
 	"exports": {

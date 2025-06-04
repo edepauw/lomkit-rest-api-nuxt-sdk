@@ -177,16 +177,6 @@ Delete resources by their IDs. (See [Delete](https://laravel-rest-api.lomkit.com
 const response = await productsResource.remove([1, 2]);
 ```
 
-## Roadmap
-
--   [x] Add support for multiple API clients
--   [x] Implement token handling via cookies
--   [ ] Add tests for the SDK with Vitest
--   [ ] Add components for input fields and forms for easier resource management
--   [ ] Add components for displaying resources in lists and tables
--   [ ] Read details from the API to use validation rules in components
--   [ ] Improve error handling and logging
-
 ## Contributions
 
 Contributions are welcome! If you have any suggestions, bug reports, or feature requests, please open an issue or submit a pull request on the [GitHub repository](https://github.com/edepauw/lomkit-rest-client).

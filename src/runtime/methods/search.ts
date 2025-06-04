@@ -1,4 +1,4 @@
-import type { ISearchQuery, ISearchResponse } from "../../types/search";
+import type { ISearchQuery, ISearchResponse } from "../types/search";
 
 const search = async <T>(
 	searchQuery: ISearchQuery<T> = {},

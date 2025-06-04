@@ -1,5 +1,5 @@
 import search from "./search";
-import type { ISearchQuery } from "../../types/search";
+import type { ISearchQuery } from "../types/search";
 
 const findOne = async <T>(
 	searchQuery: ISearchQuery<T> = {},

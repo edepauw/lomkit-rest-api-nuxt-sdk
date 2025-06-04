@@ -1,4 +1,4 @@
-import type { IMutateRequest, IMutateResponse } from "../../types/mutate";
+import type { IMutateRequest, IMutateResponse } from "../types/mutate";
 
 const mutate = async <T>(
 	mutations: IMutateRequest<T>[],
