@@ -1,4 +1,4 @@
-import type { IActionRequest, IActionResponse } from "../../types/actions";
+import type { IActionRequest, IActionResponse } from "../types/actions";
 
 const actions = async <T>(
 	actionName: string,
