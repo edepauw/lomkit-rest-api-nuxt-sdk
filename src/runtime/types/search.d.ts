@@ -13,21 +13,6 @@ interface ISearchQuery<T> {
   limit?: number;
 }
 
-interface IFindOneByIdRequest<T> {
-  text?: IText;
-  scopes?: IScopes[];
-  sorts?: ISort[];
-  selects?: ISelect[];
-  includes?: IInclude<T>[];
-  aggregates?: IAggregate<T>[];
-  instructions?: IInstruction[];
-  pagination?: IPagination;
-  gates?: IGate[];
-  page?: number;
-  limit?: number;
-}
-
-
 interface IText {
   value: string;
 }
@@ -119,7 +104,6 @@ interface ISearchResponse<T> {
 
 export type {
   ISearchQuery,
-  IFindOneByIdRequest,
   ISearchResponse,
   IText,
   IScopes,
