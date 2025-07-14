@@ -7,13 +7,27 @@ export default defineNuxtModule({
 	},
 	setup(_, nuxt) {
 		const resolver = createResolver(import.meta.url);
-		addImportsDir(resolver.resolve('./runtime/useResource'));
+		addImportsDir(resolver.resolve('./runtime/defineResource'));
 		addPlugin(resolver.resolve('./runtime/plugin'));
 
-		nuxt.hook('prepare:types', ({ references }) => {
-			references.push({
-				path: resolver.resolve('./types/lomkitRestClient.d.ts')
+		nuxt.hook('prepare:types', (opts) => {
+			const typesDir = './runtime/types/'
+			if (!Array.isArray(opts.references)) {
+				opts.references = []
+			}
+			opts.references.push({
+				path: resolver.resolve(`${typesDir}lomkitRestClient.d.ts`)
+			})
+			opts.references.push({
+				path: resolver.resolve(`${typesDir}actions.d.ts`)
+			})
+			opts.references.push({
+				path: resolver.resolve(`${typesDir}search.d.ts`)
+			})
+			opts.references.push({
+				path: resolver.resolve(`${typesDir}mutate.d.ts`)
 			})
 		})
+		nuxt.options.imports.dirs?.push('./resources/**')
 	}
 })

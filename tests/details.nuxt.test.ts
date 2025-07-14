@@ -4,12 +4,6 @@ import details from '../src/runtime/methods/details'
 const mockFetch = vi.fn()
 global.fetch = mockFetch as any
 
-const resourceUrl = 'http://localhost/api/products'
-const requestInit = {
-	headers: { Authorization: 'Bearer token' },
-	credentials: 'include' as const,
-}
-
 const mockResponseData = {
 	"data": {
 		"actions": [
@@ -78,14 +72,7 @@ const mockResponseData = {
 	}
 }
 
-
-function createFetchResponse(ok = true, data = mockResponseData, status = 200) {
-	return {
-		ok,
-		status,
-		json: vi.fn().mockResolvedValue(data),
-	}
-}
+const api = vi.fn(async (url: any, options: any) => (mockResponseData))
 
 describe('details method', () => {
 	beforeEach(() => {
@@ -93,30 +80,26 @@ describe('details method', () => {
 	})
 
 	it('should call fetch with correct arguments', async () => {
-		mockFetch.mockResolvedValueOnce(createFetchResponse())
-		await details(resourceUrl, requestInit)
-		expect(mockFetch).toHaveBeenCalledWith(
-			resourceUrl,
-			expect.objectContaining({
-				method: 'GET',
-				headers: expect.objectContaining({
-					Authorization: 'Bearer token',
-					'Content-Type': 'application/json',
-					Accept: 'application/json',
-				}),
-				credentials: 'include',
-			})
+		await details(api)
+		expect(api).toHaveBeenCalledWith(
+			"/",
+			{
+				"headers": {
+					"Accept": "application/json",
+					"Content-Type": "application/json",
+				},
+				"method": "GET",
+			}
 		)
 	})
 
 	it('should return the parsed response', async () => {
-		mockFetch.mockResolvedValueOnce(createFetchResponse())
-		const result = await details(resourceUrl, requestInit)
+		const result = await details(api)
 		expect(result).toEqual(mockResponseData)
 	})
 
 	it('should throw an error if response is not ok', async () => {
-		mockFetch.mockResolvedValueOnce(createFetchResponse(false, { message: 'fail' } as any, 404))
-		await expect(details(resourceUrl, requestInit)).rejects.toThrow('Error 404: fail')
+		api.mockImplementationOnce(() => Promise.reject(new Error('Error 404: fail')))
+		await expect(details(api)).rejects.toThrow('Error 404: fail')
 	})
 })

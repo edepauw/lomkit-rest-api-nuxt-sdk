@@ -1,4 +1,9 @@
-import type { IlomkitRestClient } from '../src/runtime/plugin'
+import { FetchOptions } from "./fetchOptions";
+
+export interface IlomkitRestClient {
+	setGlobalFetchOptions: (options: FetchOptions) => void;
+	getGlobalFetchOptions: () => FetchOptions;
+}
 
 declare module '#app' {
 	interface NuxtApp {

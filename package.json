@@ -1,65 +1,74 @@
 {
-  "name": "lomkit-rest-client",
-  "version": "1.0.7",
-  "description": "SDK for easily consuming lomkit/laravel-rest-api endpoints in Nuxt.js applications. Provides a typed, intuitive interface for handling resources.",
-  "license": "MIT",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/types.d.mts",
-      "import": "./dist/module.mjs"
-    },
-    "./useResource": {
-      "types": "./dist/runtime/useResource/index.d.ts",
-      "import": "./dist/runtime/useResource/index.js"
-    },
-    "./types/*": "./dist/runtime/types/*.d.ts"
-  },
-  "main": "./dist/module.mjs",
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./dist/types.d.mts"
-      ]
-    }
-  },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "prepack": "nuxt-module-build build",
-    "test": "vitest run",
-    "test:ui": "vitest --ui --coverage.enabled=true",
-    "release": "npm run test && npm run prepack && npm publish"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/edepauw/lomkit-rest-client.git"
-  },
-  "keywords": [
-    "sdk",
-    "laravel-rest-api",
-    "laravel-client",
-    "rest",
-    "api",
-    "nuxt"
-  ],
-  "author": "Eliott Depauw",
-  "bugs": {
-    "url": "https://github.com/edepauw/lomkit-rest-client/issues"
-  },
-  "homepage": "https://github.com/edepauw/lomkit-rest-client#readme",
-  "dependencies": {
-    "@nuxt/kit": "^3.9.0"
-  },
-  "peerDependencies": {
-    "nuxt": "^3.0.0"
-  },
-  "devDependencies": {
-    "@nuxt/module-builder": "latest",
-    "vitest": "^3.1.4",
-    "@nuxt/test-utils": "^3.19.0",
-    "@vitest/coverage-v8": "^3.1.4",
-    "@vitest/ui": "^3.1.4"
-  }
+	"name": "lomkit-rest-api-nuxt-sdk",
+	"version": "1.0.0",
+	"description": "SDK for easily consuming lomkit/laravel-rest-api endpoints in Nuxt.js applications. Provides a typed, intuitive interface for handling resources.",
+	"license": "MIT",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/types.d.mts",
+			"import": "./dist/module.mjs"
+		},
+		"./defineResource": {
+			"types": "./dist/runtime/defineResource/index.d.ts",
+			"import": "./dist/runtime/defineResource/index.js"
+		},
+		"./types/*": {
+			"types": "./dist/runtime/types/*.d.ts"
+		}
+	},
+	"main": "./dist/module.mjs",
+	"typesVersions": {
+		"*": {
+			".": [
+				"./dist/types.d.mts"
+			]
+		}
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"prepack": "nuxt-module-build build",
+		"test": "vitest run",
+		"test:ui": "vitest --ui --coverage.enabled=true",
+		"release": "npm run test && npm run prepack && npm publish"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/edepauw/lomkit-rest-api-nuxt-sdk.git"
+	},
+	"keywords": [
+		"laravel-rest-api",
+		"lomkit-rest-api-nuxt-sdk",
+		"rest",
+		"laravel rest api sdk",
+		"nuxt sdk",
+		"laravel nuxt sdk",
+		"lomkit",
+		"lomkit rest api",
+		"lomkit sdk",
+		"lomkit nuxt sdk",
+		"lomkit rest api sdk",
+		"api",
+		"nuxt"
+	],
+	"author": "Eliott Depauw",
+	"bugs": {
+		"url": "https://github.com/edepauw/lomkit-rest-api-nuxt-sdk/issues"
+	},
+	"homepage": "https://github.com/edepauw/lomkit-rest-api-nuxt-sdk#readme",
+	"dependencies": {
+		"@nuxt/kit": "^3.9.0"
+	},
+	"peerDependencies": {
+		"nuxt": "^3.0.0"
+	},
+	"devDependencies": {
+		"@nuxt/module-builder": "latest",
+		"vitest": "^3.1.4",
+		"@nuxt/test-utils": "^3.19.0",
+		"@vitest/coverage-v8": "^3.1.4",
+		"@vitest/ui": "^3.1.4"
+	}
 }
