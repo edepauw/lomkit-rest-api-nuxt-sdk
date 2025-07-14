@@ -45,10 +45,10 @@ export default defineNuxtConfig({
 to use the Lomkit REST API SDK, you need to configure it in your Nuxt 3 application. You can do this by creating a plugin file in your `plugins` directory.
 
 ```typescript
-// plugins/restClient.ts
+// plugins/restApiSdk.ts
 export default defineNuxtPlugin(() => {
-	const lomkitRestClient = useNuxtApp().$lomkitRestClient;
-	lomkitRestClient.setApiFetchOptions({
+	const restApiSdk = useNuxtApp().$restApiSdk;
+	restApiSdk.setApiFetchOptions({
 		baseURL: "https://localhost",
 		onRequest: ({ options }) => {
 			const access_token = useCookie("cookie");

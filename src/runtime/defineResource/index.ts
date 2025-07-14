@@ -42,7 +42,7 @@ const joinUrl = (base: string, path: string) =>
 const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}) => () => {
 
 	// @ts-ignore
-	const globalFetchOptions = useNuxtApp().$lomkitRestClient.getGlobalFetchOptions() as FetchOptions | null;
+	const globalFetchOptions = useNuxtApp().$restApiSdk.getGlobalFetchOptions() as FetchOptions | null;
 
 	if (!resourceName)
 		throw new Error("Resource name is required");

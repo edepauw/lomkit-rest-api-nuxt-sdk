@@ -33,7 +33,7 @@ const mockGetGlobalFetchOptions = vi.fn(() => ({
 }));
 vi.mock("nuxt/app", () => ({
 	useNuxtApp: () => ({
-		$lomkitRestClient: {
+		$restApiSdk: {
 			getGlobalFetchOptions: mockGetGlobalFetchOptions,
 		},
 	}),

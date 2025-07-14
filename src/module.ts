@@ -3,7 +3,7 @@ import { defineNuxtModule, createResolver, addImportsDir, addPlugin } from '@nux
 export default defineNuxtModule({
 	meta: {
 		name: 'lomkit-rest-client',
-		configKey: 'lomkitRestClient'
+		configKey: 'restApiSdk'
 	},
 	setup(_, nuxt) {
 		const resolver = createResolver(import.meta.url);
@@ -16,7 +16,7 @@ export default defineNuxtModule({
 				opts.references = []
 			}
 			opts.references.push({
-				path: resolver.resolve(`${typesDir}lomkitRestClient.d.ts`)
+				path: resolver.resolve(`${typesDir}restApiSdk.d.ts`)
 			})
 			opts.references.push({
 				path: resolver.resolve(`${typesDir}actions.d.ts`)

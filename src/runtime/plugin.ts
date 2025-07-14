@@ -17,7 +17,7 @@ export default defineNuxtPlugin((NuxtApp) => {
 
 	return {
 		provide: {
-			lomkitRestClient: {
+			restApiSDK: {
 				setGlobalFetchOptions,
 				getGlobalFetchOptions,
 			}

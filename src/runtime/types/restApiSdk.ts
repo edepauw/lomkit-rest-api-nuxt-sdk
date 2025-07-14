@@ -1,18 +1,18 @@
 import { FetchOptions } from "./fetchOptions";
 
-export interface IlomkitRestClient {
+export interface IrestApiSdk {
 	setGlobalFetchOptions: (options: FetchOptions) => void;
 	getGlobalFetchOptions: () => FetchOptions;
 }
 
 declare module '#app' {
 	interface NuxtApp {
-		$lomkitRestClient: IlomkitRestClient
+		$restApiSdk: IrestApiSdk
 	}
 }
 
 declare module '@vue/runtime-core' {
 	interface ComponentCustomProperties {
-		$lomkitRestClient: IlomkitRestClient
+		$restApiSdk: IrestApiSdk
 	}
 }
