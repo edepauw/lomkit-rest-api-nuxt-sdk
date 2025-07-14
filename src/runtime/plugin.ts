@@ -17,7 +17,7 @@ export default defineNuxtPlugin((NuxtApp) => {
 
 	return {
 		provide: {
-			restApiSDK: {
+			restApiSdk: {
 				setGlobalFetchOptions,
 				getGlobalFetchOptions,
 			}

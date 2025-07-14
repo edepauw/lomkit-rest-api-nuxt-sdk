@@ -1,15 +1,15 @@
-# 🔗 lomkit-rest-api-nuxt-sdk
+# 🔗 laravel-rest-api-nuxt-sdk
 
 > A Nuxt 3 SDK to easily interact with [lomkit/laravel-rest-api](https://github.com/lomkit/laravel-rest-api) endpoints — powered by TypeScript, designed for Nuxt ⚡️
 
-# 🔗 lomkit-rest-api-nuxt-sdk
+# 🔗 laravel-rest-api-nuxt-sdk
 
-[![npm version](https://img.shields.io/npm/v/lomkit-rest-api-nuxt-sdk)](https://www.npmjs.com/package/lomkit-rest-api-nuxt-sdk)
-[![npm downloads](https://img.shields.io/npm/dm/lomkit-rest-api-nuxt-sdk)](https://www.npmjs.com/package/lomkit-rest-api-nuxt-sdk)
+[![npm version](https://img.shields.io/npm/v/laravel-rest-api-nuxt-sdk)](https://www.npmjs.com/package/laravel-rest-api-nuxt-sdk)
+[![npm downloads](https://img.shields.io/npm/dm/laravel-rest-api-nuxt-sdk)](https://www.npmjs.com/package/laravel-rest-api-nuxt-sdk)
 [![types](https://img.shields.io/badge/types-TypeScript-blue)](https://www.typescriptlang.org/)
-[![license](https://img.shields.io/github/license/edepauw/lomkit-rest-api-nuxt-sdk)](./LICENSE)
+[![license](https://img.shields.io/github/license/edepauw/laravel-rest-api-nuxt-sdk)](./LICENSE)
 
-**Note:** This package is community-built and not officially affiliated with Lomkit. It’s fully open-source and contributions are welcome!
+**Note:** This package is community-built and not officially affiliated with `lomkit/laravel-rest-api`. It’s fully open-source and contributions are welcome!
 
 ---
 
@@ -27,7 +27,7 @@
 ## 📦 Installation
 
 ```bash
-npm install lomkit-rest-api-nuxt-sdk
+npm install laravel-rest-api-nuxt-sdk
 ```
 
 and then add it to your Nuxt 3 project by adding it to your `nuxt.config.ts`:
@@ -35,14 +35,14 @@ and then add it to your Nuxt 3 project by adding it to your `nuxt.config.ts`:
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-	modules: ["lomkit-rest-api-nuxt-sdk"],
+	modules: ["laravel-rest-api-nuxt-sdk"],
 	// other configurations...
 });
 ```
 
 ## ⚙️ Configuration
 
-to use the Lomkit REST API SDK, you need to configure it in your Nuxt 3 application. You can do this by creating a plugin file in your `plugins` directory.
+to use the Laravel REST API SDK, you need to configure it in your Nuxt 3 application. You can do this by creating a plugin file in your `plugins` directory.
 
 ```typescript
 // plugins/restApiSdk.ts
@@ -63,16 +63,16 @@ export default defineNuxtPlugin(() => {
 
 explanation:
 
--   `baseURL`: The base URL of your Lomkit REST API.
+-   `baseURL`: The base URL of your Laravel REST API.
 -   `onRequest`: Lets you modify request options before sending, e.g., adding an `Authorization` header from a cookie.
 
 > **Tip:** The SDK uses `ofetch` from Nuxt under the hood, so you can configure many options in the `setApiFetchOptions` method. For more details, refer to the [ofetch documentation](https://github.com/unjs/ofetch).
 
 # 📚 defineResource
 
-The `defineResource` is the main entry point for interacting with the Lomkit REST API. It allows you to create a resource SDK that can perform various operations on a specific resource.
+The `defineResource` is the main entry point for interacting with the Laravel REST API. It allows you to create a resource SDK that can perform various operations on a specific resource.
 
-The `defineResource<T>(resourceName, resourcePreset?)` composable returns an object with methods to interact with a specific resource via the Lomkit REST API. See the [methods](#methods) section for more details.
+The `defineResource<T>(resourceName, resourcePreset?)` composable returns an object with methods to interact with a specific resource via the Laravel REST API. See the [methods](#methods) section for more details.
 
 > **Tip:** All resources in the `resources` folder are auto-imported by Nuxt, so you can use them directly in your components without manual imports.
 

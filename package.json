@@ -1,6 +1,6 @@
 {
-	"name": "lomkit-rest-api-nuxt-sdk",
-	"version": "1.0.1",
+	"name": "laravel-rest-api-nuxt-sdk",
+	"version": "1.0.0",
 	"description": "SDK for easily consuming lomkit/laravel-rest-api endpoints in Nuxt.js applications. Provides a typed, intuitive interface for handling resources.",
 	"license": "MIT",
 	"type": "module",
@@ -36,7 +36,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/edepauw/lomkit-rest-api-nuxt-sdk.git"
+		"url": "git+https://github.com/edepauw/laravel-rest-api-nuxt-sdk.git"
 	},
 	"keywords": [
 		"laravel-rest-api",
@@ -55,9 +55,9 @@
 	],
 	"author": "Eliott Depauw",
 	"bugs": {
-		"url": "https://github.com/edepauw/lomkit-rest-api-nuxt-sdk/issues"
+		"url": "https://github.com/edepauw/laravel-rest-api-nuxt-sdk/issues"
 	},
-	"homepage": "https://github.com/edepauw/lomkit-rest-api-nuxt-sdk#readme",
+	"homepage": "https://github.com/edepauw/laravel-rest-api-nuxt-sdk#readme",
 	"dependencies": {
 		"@nuxt/kit": "^3.9.0"
 	},

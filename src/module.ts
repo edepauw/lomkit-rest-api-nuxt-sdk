@@ -2,7 +2,7 @@ import { defineNuxtModule, createResolver, addImportsDir, addPlugin } from '@nux
 
 export default defineNuxtModule({
 	meta: {
-		name: 'lomkit-rest-client',
+		name: 'laravel-rest-api-nuxt-sdk',
 		configKey: 'restApiSdk'
 	},
 	setup(_, nuxt) {
