@@ -39,7 +39,7 @@ const joinUrl = (base: string, path: string) =>
  *     }
  *   });
  */
-const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}) => () => {
+const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}) => (additionalPreset: IResourcePreset<T> = {}) => {
 
 	// @ts-ignore
 	const globalFetchOptions = useNuxtApp().$restApiSdk.getGlobalFetchOptions() as FetchOptions | null;
@@ -47,16 +47,18 @@ const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}
 	if (!resourceName)
 		throw new Error("Resource name is required");
 
+	const presets = { ...preset, ...additionalPreset };
+
 	const resourceUrl = joinUrl(globalFetchOptions?.baseURL ?? "", `api/${resourceName}`);
 
 	// @ts-ignore
 	const api = $fetch.create({
 		...globalFetchOptions,
 		baseURL: resourceUrl,
-		onRequest: combineHooks(globalFetchOptions?.onRequest, preset.onRequest),
-		onRequestError: combineHooks(globalFetchOptions?.onRequestError, preset.onRequestError),
-		onResponse: combineHooks(globalFetchOptions?.onResponse, preset.onResponse),
-		onResponseError: combineHooks(globalFetchOptions?.onResponseError, preset.onResponseError),
+		onRequest: combineHooks(globalFetchOptions?.onRequest, presets.onRequest),
+		onRequestError: combineHooks(globalFetchOptions?.onRequestError, presets.onRequestError),
+		onResponse: combineHooks(globalFetchOptions?.onResponse, presets.onResponse),
+		onResponseError: combineHooks(globalFetchOptions?.onResponseError, presets.onResponseError),
 	})
 
 
@@ -76,7 +78,7 @@ const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}
 		 *     filters: [{ field: "category.name", value: "electronics" }]
 		 *   });
 		 */
-		search: (request: ISearchQuery<T> = {}): Promise<ISearchResponse<T>> => search(request, api),
+		search: (request: ISearchQuery<T> = {}): Promise<ISearchResponse<T>> => search({ ...presets.search, ...request }, api),
 
 		/**
 		 * @description Mutates resources.
