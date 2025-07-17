@@ -5,6 +5,8 @@ import mutate from "../methods/mutate";
 import details from "../methods/details";
 import actions from "../methods/actions";
 import remove from "../methods/delete";
+import forceDelete from "../methods/forceDelete";
+import restore from "../methods/restore";
 import { $fetch } from 'ofetch'
 
 
@@ -49,7 +51,7 @@ const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}
 
 	const presets = { ...preset, ...additionalPreset };
 
-	const resourceUrl = joinUrl(globalFetchOptions?.baseURL ?? "", `api/${resourceName}`);
+	const resourceUrl = joinUrl(globalFetchOptions?.baseURL ?? "", `/${resourceName}`);
 
 	// @ts-ignore
 	const api = $fetch.create({
@@ -114,6 +116,21 @@ const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}
 		 * @returns {Promise<any>} The result of the remove operation.
 		 */
 		remove: (ids: number[]): Promise<any> => remove(ids, api),
+
+		/**
+		 * @description Force delete resources by their IDs.
+		 * @param {number[]} ids The IDs of the resources to force delete.
+		 * @returns {Promise<any>} The result of the force delete operation.
+		 */
+		forceDelete: (ids: number[]): Promise<any> => forceDelete(ids, api),
+
+
+		/**
+		 * @description Force delete resources by their IDs.
+		 * @param {number[]} ids The IDs of the resources to force delete.
+		 * @returns {Promise<any>} The result of the force delete operation.
+		 */
+		restore: (ids: number[]): Promise<any> => restore(ids, api),
 	};
 };
 

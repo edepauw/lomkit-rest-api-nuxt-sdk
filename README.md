@@ -48,8 +48,8 @@ to use the Laravel REST API SDK, you need to configure it in your Nuxt 3 applica
 // plugins/restApiSdk.ts
 export default defineNuxtPlugin(() => {
 	const restApiSdk = useNuxtApp().$restApiSdk;
-	restApiSdk.setApiFetchOptions({
-		baseURL: "https://localhost",
+	restApiSdk.setGlobalFetchOptions({
+		baseURL: "https://localhost/api",
 		onRequest: ({ options }) => {
 			const access_token = useCookie("cookie");
 			options.headers.set(
@@ -66,7 +66,7 @@ explanation:
 -   `baseURL`: The base URL of your Laravel REST API.
 -   `onRequest`: Lets you modify request options before sending, e.g., adding an `Authorization` header from a cookie.
 
-> **Tip:** The SDK uses `ofetch` from Nuxt under the hood, so you can configure many options in the `setApiFetchOptions` method. For more details, refer to the [ofetch documentation](https://github.com/unjs/ofetch).
+> **Tip:** The SDK uses `ofetch` from Nuxt under the hood, so you can configure many options in the `setGlobalFetchOptions` method. For more details, refer to the [ofetch documentation](https://github.com/unjs/ofetch).
 
 # 📚 defineResource
 
