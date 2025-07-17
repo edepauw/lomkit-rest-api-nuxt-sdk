@@ -126,9 +126,9 @@ const defineResource = <T>(resourceName: string, preset: IResourcePreset<T> = {}
 
 
 		/**
-		 * @description Force delete resources by their IDs.
-		 * @param {number[]} ids The IDs of the resources to force delete.
-		 * @returns {Promise<any>} The result of the force delete operation.
+		 * @description Restore resources by their IDs.
+		 * @param {number[]} ids The IDs of the resources to restore.
+		 * @returns {Promise<any>} The result of the restore operation.
 		 */
 		restore: (ids: number[]): Promise<any> => restore(ids, api),
 	};
